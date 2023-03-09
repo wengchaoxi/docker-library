@@ -8,14 +8,13 @@ on:
     branches:
       - main
     paths:
-      - chatgpt-web/**
+      - chatgpt-web/*
       - .github/workflows/chatgpt-web.yml
   pull_request:
     branches:
       - main
     paths:
-      - chatgpt-web/**
-      - .github/workflows/chatgpt-web.yml
+      - chatgpt-web/*
 
 jobs:
   build-and-push:
@@ -43,6 +42,6 @@ jobs:
           file: chatgpt-web/Dockerfile
           platforms: linux/amd64
           context: chatgpt-web
-          push: true
+          push: ${{ github.ref == 'refs/heads/main' }}
           tags: |
-            wengchaoxi/chatgpt-web:latest
+            ${{ secrets.DOCKER_USERNAME }}/chatgpt-web:latest
