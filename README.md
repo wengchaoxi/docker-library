@@ -34,7 +34,6 @@ on:
       - main
     paths:
       - example/**
-      - .github/workflows/example.yml
 
 jobs:
   build-and-push:
@@ -69,8 +68,8 @@ jobs:
           file: example/Dockerfile
           platforms: linux/amd64
           context: example
-          push: true
+          push: ${{ github.ref == 'refs/heads/main' }}
           tags: |
-            wengchaoxi/example:latest
-            ghcr.io/wengchaoxi/example:latest
+            ${{ secrets.DOCKER_USERNAME }}/example:latest
+            ghcr.io/${{ github.repository_owner }}/example:latest
 ```
