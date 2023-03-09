@@ -1,0 +1,47 @@
+# See: https://github.com/wengchaoxi/docker-library
+
+name: Build and push `chatgpt-proxy` docker image
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - chatgpt-proxy/**
+      - .github/workflows/chatgpt-proxy.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - chatgpt-proxy/**
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Set up qemu
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up docker buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to docker hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push docker image
+        uses: docker/build-push-action@v2
+        with:
+          file: chatgpt-proxy/Dockerfile
+          platforms: linux/amd64
+          context: chatgpt-proxy
+          push: ${{ github.ref == 'refs/heads/main' }}
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/chatgpt-proxy:latest
