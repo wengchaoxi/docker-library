@@ -3,8 +3,8 @@
 name: Build and push `sd-webui` docker image
 
 env:
-  IMAGE_TAG: "1.3.0"
-  COMMIT_SHA: "20ae71faa8ef035c31aa3a410b707d792c8203a3"
+  IMAGE_TAG: "1.6.0"
+  COMMIT_SHA: "5ef669de080814067961f28357256e8fe27544f4"
 
 on:
   workflow_dispatch:
