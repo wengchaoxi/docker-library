@@ -34,8 +34,11 @@ MOUNTS["${ROOT}/embeddings"]="/data/embeddings"
 MOUNTS["${ROOT}/config.json"]="/data/config/auto/config.json"
 MOUNTS["${ROOT}/ui-config.json"]="/data/config/auto/ui-config.json"
 MOUNTS["${ROOT}/styles.csv"]="/data/config/auto/styles.csv"
-MOUNTS["${ROOT}/extensions"]="/data/config/auto/extensions"
 MOUNTS["${ROOT}/config_states"]="/data/config/auto/config_states"
+
+# extensions
+MOUNTS["${ROOT}/extensions/sd-webui-controlnet/models"]="/data/extensions/sd-webui-controlnet/models"
+MOUNTS["${ROOT}/extensions/sd-webui-controlnet/annotator/downloads"]="/data/extensions/sd-webui-controlnet/annotator/downloads"
 
 # extra hacks
 MOUNTS["${ROOT}/repositories/CodeFormer/weights/facelib"]="/data/.cache"

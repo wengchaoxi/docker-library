@@ -70,12 +70,21 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 RUN apt-get -y install libgoogle-perftools-dev && apt-get clean
 ENV LD_PRELOAD=libtcmalloc.so
 
-ARG SHA
+ARG SD_WEBUI_SHA
 RUN --mount=type=cache,target=/root/.cache/pip \
   cd stable-diffusion-webui && \
   git fetch && \
   git reset --hard ${SHA} && \
   pip install -r requirements_versions.txt
+
+ARG SD_WEBUI_CONTROLNET_SHA
+RUN --mount=type=cache,target=/root/.cache/pip \
+  cd ${ROOT}/extensions && \
+  git clone https://github.com/Mikubill/sd-webui-controlnet.git && \
+  cd sd-webui-controlnet && \
+  git reset --hard ${SD_WEBUI_CONTROLNET_SHA} && \
+  rm -rf .git && \
+  pip install -r requirements.txt
 
 COPY . /docker
 

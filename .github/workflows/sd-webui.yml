@@ -4,7 +4,8 @@ name: Build and push `sd-webui` docker image
 
 env:
   IMAGE_TAG: "1.6.0"
-  COMMIT_SHA: "5ef669de080814067961f28357256e8fe27544f4"
+  SD_WEBUI_SHA: "5ef669de080814067961f28357256e8fe27544f4"
+  SD_WEBUI_CONTROLNET_SHA: "2ecec1327481cc83d562fb705b0e14b3875d2c7e"
 
 on:
   workflow_dispatch:
@@ -51,4 +52,5 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/sd-webui:${{ env.IMAGE_TAG }}
             ${{ secrets.DOCKER_USERNAME }}/sd-webui:latest
           build-args: |
-            SHA=${{ env.COMMIT_SHA }}
+            SD_WEBUI_SHA=${{ env.SD_WEBUI_SHA }}
+            SD_WEBUI_CONTROLNET_SHA=${{ env.SD_WEBUI_CONTROLNET_SHA }}
