@@ -42,7 +42,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push docker image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           file: sd-webui/Dockerfile
           platforms: linux/amd64
